@@ -574,3 +574,25 @@ h2 {
     -webkit-text-fill-color: transparent;
     margin: 2rem 0;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1, h2, h3, p, .feature-pills, .stats, .feature-card, .spec-item, .timeline-item {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Stagger the animations */
+h1 { animation-delay: 0.2s; }
+p { animation-delay: 0.4s; }
+.feature-pills { animation-delay: 0.6s; }
+.stats { animation-delay: 0.8s; }
+.feature-card, .spec-item, .timeline-item { animation-delay: 1s; }
