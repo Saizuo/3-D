@@ -91,20 +91,15 @@ function showLoading() {
 async function convertToModel(imageData) {
   console.log("Starting conversion process");
   const apiKey = "mtEmozRWSWMXRoaNyqNE4VM11nPpb127tRpoKd6kblZVCcLNLqC3goiQATjF";
-
-  // First, we'll upload the image to ImgBB to get a URL
-  const imgbbApiKey = "57373c61b5347fae87054e8f385fe92b"; // You'll need to sign up for an ImgBB API key
+  const imgbbApiKey = "57373c61b5347fae87054e8f385fe92b";
 
   try {
-    // Remove the data:image/[type];base64, prefix from the base64 string
+    // Upload to ImgBB (existing code)
     const base64Image = imageData.split(",")[1];
-
-    // Create form data for ImgBB upload
     const formData = new FormData();
     formData.append("key", imgbbApiKey);
     formData.append("image", base64Image);
 
-    // Upload to ImgBB
     console.log("Uploading image to ImgBB...");
     const uploadResponse = await fetch("https://api.imgbb.com/1/upload", {
       method: "POST",
@@ -112,7 +107,6 @@ async function convertToModel(imageData) {
     });
 
     const uploadResult = await uploadResponse.json();
-
     if (!uploadResult.success) {
       throw new Error("Failed to upload image");
     }
@@ -120,10 +114,10 @@ async function convertToModel(imageData) {
     const imageUrl = uploadResult.data.url;
     console.log("Image uploaded successfully:", imageUrl);
 
-    // Now we can use the URL in our API request
+    // Initial API request
     const requestData = {
       key: apiKey,
-      image: imageUrl, // Use the uploaded image URL here
+      image: imageUrl,
       output_format: "glb",
       ss_sampling_steps: 50,
       slat_sampling_steps: 50,
@@ -131,7 +125,7 @@ async function convertToModel(imageData) {
       temp: "no",
     };
 
-    console.log("Sending API request...");
+    console.log("Sending initial API request...");
     const response = await fetch(
       "https://modelslab.com/api/v6/3d/image_to_3d",
       {
@@ -144,26 +138,20 @@ async function convertToModel(imageData) {
     );
 
     const result = await response.json();
-    console.log("API Response:", result);
+    console.log("Initial API Response:", result);
 
-    if (result.status === "success") {
-      const modelUrl = result.output[0];
-      console.log("Model URL received:", modelUrl);
-
-      // Check if modelUrl exists using HEAD request
-      try {
-        const headResponse = await fetch(modelUrl, { method: "HEAD" });
-        if (headResponse.ok) {
-          console.log("Model URL ok:", modelUrl);
-        } else {
-          console.error("Model URL not accessible");
-        }
-      } catch (error) {
-        console.error("Error checking model URL:", error);
+    if (result.status === "processing") {
+      console.log("Processing started, initiating polling...");
+      const modelUrl = await pollForCompletion(result.fetch_result, result.eta);
+      if (modelUrl) {
+        await validateAndLoadModel(modelUrl);
       }
-      loadModelIntoPreview(modelUrl);
+    } else if (result.status === "success") {
+      const modelUrl = result.output[0];
+      await validateAndLoadModel(modelUrl);
     } else {
-      console.error("API returned non-success status:", result);
+      console.error("Unexpected API response status:", result.status);
+      throw new Error(`Unexpected status: ${result.status}`);
     }
   } catch (error) {
     console.error("Conversion error:", error);
@@ -173,6 +161,71 @@ async function convertToModel(imageData) {
     loadingIndicator.style.display = "none";
   }
 }
+
+async function pollForCompletion(fetchUrl, initialEta) {
+  console.log("Starting polling with initial ETA:", initialEta);
+  const maxAttempts = 30; // Maximum number of polling attempts
+  let attempts = 0;
+  let delay = Math.max(initialEta * 1000, 2000); // Convert ETA to milliseconds, minimum 2 seconds
+
+  while (attempts < maxAttempts) {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      console.log(`Polling attempt ${attempts + 1}/${maxAttempts}`);
+      const response = await fetch(fetchUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = await response.json();
+      console.log("Polling response:", result);
+
+      if (
+        result.status === "success" &&
+        result.future_links &&
+        result.future_links.length > 0
+      ) {
+        console.log("Processing completed successfully");
+        return result.future_links[0];
+      } else if (result.status === "processing") {
+        console.log("Still processing, continuing to poll...");
+        // Adjust delay based on new ETA if provided
+        delay = result.eta ? Math.max(result.eta * 1000, 2000) : delay;
+      } else {
+        throw new Error(`Unexpected status during polling: ${result.status}`);
+      }
+
+      attempts++;
+    } catch (error) {
+      console.error("Polling error:", error);
+      throw error;
+    }
+  }
+
+  throw new Error("Maximum polling attempts reached");
+}
+
+async function validateAndLoadModel(modelUrl) {
+  console.log("Validating model URL:", modelUrl);
+  try {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    const headResponse = await fetch(modelUrl, { method: "HEAD" });
+    if (headResponse.ok) {
+      console.log("Model URL validated successfully");
+    } else {
+      console.error("Model URL not accessible");
+    }
+    loadModelIntoPreview(modelUrl);
+  } catch (error) {
+    console.error("Error validating model URL:", error);
+    throw error;
+  }
+}
+
 function loadModelIntoPreview(modelUrl) {
   console.log("Starting model preview loading");
   const canvas = document.getElementById("modelPreview");
