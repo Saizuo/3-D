@@ -1,0 +1,25 @@
+{
+  "name": "3-d",
+  "version": "1.0.0",
+  "main": "script.js",
+  "module": "module",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saizuo/3-D.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saizuo/3-D/issues"
+  },
+  "homepage": "https://github.com/Saizuo/3-D#readme",
+  "description": "",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
