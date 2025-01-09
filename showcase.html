@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase - 3D.png</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="starry-background"></div>
+    <div class="floating-elements">
+        <div class="grid-lines"></div>
+        <div class="glowing-orbs"></div>
+        <div class="tech-circles"></div>
+    </div>
+
+    <nav>
+        <div class="nav-logo">3D.png</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="features.html">Features</a>
+            <a href="showcase.html">Showcase</a>
+        </div>
+    </nav>
+
+    <main style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+        <div class="hero" style="width: 100%; display: flex; justify-content: center;">
+            <div class="hero-content" style="text-align: center; max-width: 1400px; display: flex; flex-direction: column; align-items: center;">
+                <h1>Model Gallery</h1>
+                <p>Explore amazing transformations created by our users</p>
+
+
+                <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; width: 100%; padding: 2rem;">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item" style="background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease;">
+                        <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
+                            <canvas id="model1" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h3>Gaming Character</h3>
+                            <p>From concept art to 3D model</p>
+                            <div class="tags" style="margin-top: 1rem;">
+                                <span class="pill">Character</span>
+                                <span class="pill">Gaming</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item" style="background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden;">
+                        <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
+                            <canvas id="model2" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h3>Product Design</h3>
+                            <p>Product visualization in 3D</p>
+                            <div class="tags" style="margin-top: 1rem;">
+                                <span class="pill">Product</span>
+                                <span class="pill">Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item" style="background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden;">
+                        <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
+                            <canvas id="model3" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <h3>Architectural Model</h3>
+                            <p>Building concept to 3D visualization</p>
+                            <div class="tags" style="margin-top: 1rem;">
+                                <span class="pill">Architecture</span>
+                                <span class="pill">Design</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add more gallery items following the same pattern -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="scripts/modelViewer.js"></script>
+</body>
+</html>

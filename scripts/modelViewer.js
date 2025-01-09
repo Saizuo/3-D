@@ -6,9 +6,10 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setSize(800, 800);
-camera.position.z = 8;
-camera.position.y = 2;
+camera.position.y = 8;  // Move camera up
+camera.position.z = 35; // Keep zoomed out
 camera.position.x = 4;
+camera.rotation.x = -0.3; // Tilt camera downward
 
 // Add OrbitControls for mouse interaction
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -20,7 +21,7 @@ controls.enableZoom = true;
 const loader = new THREE.GLTFLoader();
 let model;
 
-loader.load('dino.glb', function(gltf) {
+loader.load('painterly_cottage.glb', function(gltf) {
     model = gltf.scene;
     model.scale.set(10, 10, 10);
     model.rotation.y = Math.PI * 0.25; // Initial 45-degree rotation
