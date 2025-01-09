@@ -15,10 +15,11 @@
         <div class="tech-circles"></div>
     </div>
 
-        <nav>
-            <div class="nav-logo">
-                <a href="index.html" style="text-decoration: none; color: inherit;">3D.png</a>
-            </div>        <div class="nav-links">
+    <nav>
+        <div class="nav-logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">3D.png</a>
+        </div>
+        <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="features.html">Features</a>
@@ -38,7 +39,12 @@
                     <h3>Drop your image here</h3>
                     <p>or</p>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Choose File</button>
+                    <button class="btn btn-primary" onclick="fileInput.click()">Choose File</button>
+                </div>
+                <!-- Loading Indicator -->
+                <div class="loading-indicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Converting your image to 3D...</p>
                 </div>
 
                 <!-- Preview Section -->
@@ -74,72 +80,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-
-    <script>
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-        const previewSection = document.querySelector('.preview-section');
-        const originalPreview = document.getElementById('originalPreview');
-
-        // Handle drag and drop
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = '#EC4899';
-        });
-
-        dropZone.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = '#8B5CF6';
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            handleFile(e.dataTransfer.files[0]);
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            handleFile(e.target.files[0]);
-        });
-
-        function handleFile(file) {
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    originalPreview.src = e.target.result;
-                    previewSection.style.display = 'block';
-                    initiate3DConversion(file);
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function initiate3DConversion(file) {
-            // Here you would integrate with your 3D conversion API
-            // For now, we'll simulate loading with a timeout
-            setTimeout(() => {
-                // Initialize Three.js scene with converted model
-                initThreeJsScene();
-            }, 2000);
-        }
-
-        function initThreeJsScene() {
-            const canvas = document.getElementById('modelPreview');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, canvas.width/canvas.height, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({canvas, alpha: true});
-            
-            // Add lights and your converted 3D model here
-            const light = new THREE.AmbientLight(0xffffff, 1);
-            scene.add(light);
-            
-            camera.position.z = 5;
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                renderer.render(scene, camera);
-            }
-            animate();
-        }
-    </script>
+    <script src="scripts/convert.js"></script>
 </body>
 </html>
