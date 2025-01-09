@@ -237,26 +237,17 @@
             </div>
 
             <div class="override-main-padding">
-                <main style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-                    <div class="hero" style="width: 100%; display: flex; justify-content: center;">
-                        <div class="hero-content" style="text-align: center; max-width: 1400px; display: flex; flex-direction: column; align-items: center;">
+                    <main style="display: flex; justify-content: center; align-items: center;">
+                        <div class="hero" style="width: 100%; display: flex; justify-content: center; padding: 2rem 0;">
+                            <div class="hero-content" style="text-align: center; max-width: 1400px; display: flex; flex-direction: column; align-items: center;">
                             <h1>Model Gallery</h1>
                             <p>Explore amazing transformations created by our users</p>
             
-            
                             <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; width: 100%; padding: 2rem;">
                                 <!-- Gallery Item 1 -->
-                                <div class="gallery-item" style="background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease;">
+                                <div class="gallery-item" style="background: rgba(255,255,255,0.05); border-radius: 1rem; overflow: hidden;">
                                     <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
                                         <canvas id="model1" style="width: 100%; height: 100%;"></canvas>
-                                    </div>
-                                    <div style="padding: 1.5rem;">
-                                        <h3>Gaming Character</h3>
-                                        <p>From concept art to 3D model</p>
-                                        <div class="tags" style="margin-top: 1rem;">
-                                            <span class="pill">Character</span>
-                                            <span class="pill">Gaming</span>
-                                        </div>
                                     </div>
                                 </div>
             
@@ -265,14 +256,6 @@
                                     <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
                                         <canvas id="model2" style="width: 100%; height: 100%;"></canvas>
                                     </div>
-                                    <div style="padding: 1.5rem;">
-                                        <h3>Product Design</h3>
-                                        <p>Product visualization in 3D</p>
-                                        <div class="tags" style="margin-top: 1rem;">
-                                            <span class="pill">Product</span>
-                                            <span class="pill">Design</span>
-                                        </div>
-                                    </div>
                                 </div>
             
                                 <!-- Gallery Item 3 -->
@@ -280,24 +263,15 @@
                                     <div style="height: 300px; background: rgba(139, 92, 246, 0.1);">
                                         <canvas id="model3" style="width: 100%; height: 100%;"></canvas>
                                     </div>
-                                    <div style="padding: 1.5rem;">
-                                        <h3>Architectural Model</h3>
-                                        <p>Building concept to 3D visualization</p>
-                                        <div class="tags" style="margin-top: 1rem;">
-                                            <span class="pill">Architecture</span>
-                                            <span class="pill">Design</span>
-                                        </div>
-                                    </div>
                                 </div>
-            
-                                <!-- Add more gallery items following the same pattern -->
                             </div>
                         </div>
                     </div>
                 </main>
-          </div>
+            </div>
             
-          <footer style="margin-top: 4rem;">
+            
+          <footer style="margin-top: 1rem;">
             <div class="footer-container" style="background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); padding: 4rem 10%;">
                 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4rem;">
                     <!-- Brand Section -->
@@ -350,5 +324,6 @@
     <script src="scripts/modelViewer.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/convert.js"></script>
+    <script src="scripts/galleryModels.js"></script>
 </body>
 </html>
