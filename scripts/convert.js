@@ -227,82 +227,67 @@ async function validateAndLoadModel(modelUrl) {
 }
 
 function loadModelIntoPreview(modelUrl) {
-  console.log("Starting model preview loading");
-  const canvas = document.getElementById("modelPreview");
-  console.log("Canvas element:", canvas);
-
+  const canvas = document.getElementById('modelPreview');
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    75,
-    canvas.width / canvas.height,
-    0.1,
-    1000
-  );
+  const camera = new THREE.PerspectiveCamera(60, canvas.width / canvas.height, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-
-  console.log("Three.js setup complete");
-  console.log("Canvas dimensions:", {
-    width: canvas.clientWidth,
-    height: canvas.clientHeight,
-  });
-
+    
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    
+  // Enhanced lighting setup
+  const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
   scene.add(ambientLight);
-
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
   directionalLight.position.set(0, 1, 1);
   scene.add(directionalLight);
-
-  console.log("Lights added to scene");
-
+    
+  const frontLight = new THREE.DirectionalLight(0xffffff, 2);
+  frontLight.position.set(0, 0, 5);
+  scene.add(frontLight);
+    
+  const backLight = new THREE.DirectionalLight(0xffffff, 2);
+  backLight.position.set(0, 0, -5);
+  scene.add(backLight);
+    
   const loader = new THREE.GLTFLoader();
-  console.log("Loading model from URL:", modelUrl);
   enableDownloadOptions(modelUrl);
-  loader.load(
-    modelUrl,
-    (gltf) => {
-      console.log("Model loaded successfully");
+  loader.load(modelUrl, (gltf) => {
       const model = gltf.scene;
-      model.scale.set(10, 10, 10);
-      model.position.y = -5;
+        
+      // Center and scale the model
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 20 / maxDim;
+        
+      model.scale.multiplyScalar(scale);
+      model.position.sub(center.multiplyScalar(scale));
       scene.add(model);
-
+        
+      // Improved camera and controls setup
       const controls = new THREE.OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
-
-      camera.position.z = 35;
-      camera.position.y = 10;
-
-      console.log("Camera position set:", {
-        x: camera.position.x,
-        y: camera.position.y,
-        z: camera.position.z,
-      });
-
+      controls.screenSpacePanning = false;
+      controls.maxPolarAngle = Math.PI / 1.5;
+      controls.minDistance = 20;
+      controls.maxDistance = 50;
+        
+      camera.position.set(15, 10, 15);
+      camera.lookAt(0, 0, 0);
+        
       function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
+          requestAnimationFrame(animate);
+          controls.update();
+          renderer.render(scene, camera);
       }
       animate();
-      console.log("Animation loop started");
-    },
-    (progress) => {
-      console.log("Loading progress:", {
-        loaded: progress.loaded,
-        total: progress.total,
-        percent: ((progress.loaded / progress.total) * 100).toFixed(2) + "%",
-      });
-    },
-    (error) => {
-      console.error("Error loading model:", error);
-    }
-  );
+  });
 }
-
 function enableDownloadOptions(modelUrl) {
   console.log("Enabling download options for URL:", modelUrl);
   const downloadContainer = document.querySelector(".format-buttons");
