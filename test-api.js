@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 const testAPI = async () => {
-    const apiKey = 'mtEmozRWSWMXRoaNyqNE4VM11nPpb127tRpoKd6kblZVCcLNLqC3goiQATjF';
+    const apiKey = '';
     
     // Test image URL
     const testImage = "https://i.pinimg.com/736x/7c/83/64/7c83645c903677dd93ef50fe953dceea.jpg";
