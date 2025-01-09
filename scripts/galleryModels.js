@@ -1,29 +1,32 @@
 function createScene(canvasId, modelPath) {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector(canvasId),
         alpha: true
     });
 
-    renderer.setSize(400, 300);
+    renderer.setSize(500, 500);
 
     // Different settings for each model
     if (canvasId === '#model1') {
-        camera.position.z = 25;
-        camera.position.y = 6;
-    } else if (canvasId === '#model2') {
         camera.position.z = 35;
-        camera.position.y = 8;
+        camera.position.y = 6;     // Lower height
+        camera.position.x = -2;    // More to the left
+    } else if (canvasId === '#model2') {
+        camera.position.z = 45;
+        camera.position.y = 8;     // Lower height
+        camera.position.x = -3;    // More to the left
     } else if (canvasId === '#model3') {
-        camera.position.z = 900;  // Much further back
-        camera.position.y = 50;   // Higher viewpoint
-        camera.position.x = 20;   // Side angle
+        camera.position.z = 100;
+        camera.position.y = 30;    // Keep height
+        camera.position.x = -5;    // More to the left
     }
 
-    camera.rotation.x = -0.3;
+    camera.rotation.x = -0.2;
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    camera.aspect = 500 / 500;
+    camera.updateProjectionMatrix();    const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.screenSpacePanning = false;
@@ -41,14 +44,19 @@ function createScene(canvasId, modelPath) {
 
     loader.load(modelPath, function(gltf) {
         const model = gltf.scene;
-        if (canvasId === '#model3') {
-            model.scale.set(60, 60, 60);  // Much larger scale for car
-            model.position.y = -30;       // Lower position
-        } else {
-            model.scale.set(10, 10, 10);
-            model.position.y = -5;
-        }
-        model.rotation.y = Math.PI * 0.25;
+        if (canvasId === '#model1') {
+            model.scale.set(6, 6, 6);
+            model.position.x = -5;     // Move up
+            model.position.y = -4;      // Move up
+        } else if (canvasId === '#model2') {
+            model.scale.set(6, 6, 6);
+            model.position.x = -5;     // Move up
+            model.position.y = 3;      // Move up
+        } else if (canvasId === '#model3') {
+            model.scale.set(2, 2, 2);
+            model.position.x = -10;     // Move up
+            model.position.y = 15;     // Move up
+        }        model.rotation.y = Math.PI * 0.25;
         scene.add(model);
 
         if (canvasId !== '#model3') {
