@@ -6,10 +6,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setSize(800, 800);
-camera.position.y = 8;  // Move camera up
-camera.position.z = 35; // Keep zoomed out
-camera.position.x = 4;
-camera.rotation.x = -0.3; // Tilt camera downward
+camera.position.z = 27; // Reduce from 35 to zoom in
+camera.position.y = 6;  // Adjust height slightly
+camera.position.x = 3;  // Adjust side positioncamera.rotation.x = -0.3; // Tilt camera downward
 
 // Add OrbitControls for mouse interaction
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -20,22 +19,35 @@ controls.enableZoom = true;
 
 const loader = new THREE.GLTFLoader();
 let model;
+let mixer;
 
-loader.load('painterly_cottage.glb', function(gltf) {
+loader.load('robot_playground.glb', function(gltf) {
     model = gltf.scene;
     model.scale.set(10, 10, 10);
-    model.rotation.y = Math.PI * 0.25; // Initial 45-degree rotation
+    model.rotation.y = Math.PI * 0.25;
+    model.position.y = -5; // This will move the model down
     scene.add(model);
+    
+    // Animation code
+    mixer = new THREE.AnimationMixer(model);
+    const animations = gltf.animations;
+    if (animations && animations.length) {
+        animations.forEach((clip) => {
+            mixer.clipAction(clip).play();
+        });
+    }
 }, undefined, function(error) {
     console.error(error);
 });
 
 function animate() {
     requestAnimationFrame(animate);
+    if (mixer) {
+        mixer.update(0.016); // Update animations (roughly 60fps)
+    }
     controls.update();
     renderer.render(scene, camera);
 }
-
 animate();
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
