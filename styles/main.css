@@ -631,3 +631,7 @@ p { animation-delay: 0.4s; }
     width: 100vw;
     padding: 0 10%;
 }
+
+html {
+    scroll-behavior: smooth;
+}
