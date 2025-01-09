@@ -155,13 +155,13 @@ async function convertToModel(imageData) {
         const headResponse = await fetch(modelUrl, { method: "HEAD" });
         if (headResponse.ok) {
           console.log("Model URL ok:", modelUrl);
-          loadModelIntoPreview(modelUrl);
         } else {
           console.error("Model URL not accessible");
         }
       } catch (error) {
         console.error("Error checking model URL:", error);
       }
+      loadModelIntoPreview(modelUrl);
     } else {
       console.error("API returned non-success status:", result);
     }
