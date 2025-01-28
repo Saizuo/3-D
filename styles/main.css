@@ -7,13 +7,13 @@
 :root {
     --black: #000000;
     --glass: rgba(255, 255, 255, 0.1);
-    --primary: #8B5CF6;
-    --primary-glow: rgba(139, 92, 246, 0.3);
+    --primary: #5c97f6;
+    --primary-glow: rgba(92, 113, 246, 0.3);
     --text: #ffffff;
     --text-secondary: #a1a1aa;
-    --neon-purple: #8B5CF6;
+    --neon-purple: #1650e3;
     --neon-pink: #EC4899;
-    --glow: rgba(139, 92, 246, 0.5);
+    --glow: rgba(92, 166, 246, 0.5);
 }
 
 /* Copy all the CSS styles from the original file and paste them here */
@@ -79,7 +79,7 @@ nav {
 .nav-logo {
     font-size: 1.5rem;
     font-weight: 700;
-    background: linear-gradient(45deg, var(--primary), #A78BFA);
+    background: linear-gradient(45deg, var(--primary), #8ba1fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -103,10 +103,10 @@ main {
 
 :root {
     --black: #000000;
-    --neon-purple: #8B5CF6;
+    --neon-purple: #5c9cf6;
     --neon-pink: #EC4899;
     --glass: rgba(255, 255, 255, 0.05);
-    --glow: rgba(139, 92, 246, 0.5);
+    --glow: rgba(92, 141, 246, 0.5);
 }
 
 .hero {
@@ -129,7 +129,7 @@ main {
     background: linear-gradient(to right, #fff, #8B5CF6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 30px rgba(95, 92, 246, 0.5);
 }
 
 .hero p {
@@ -265,7 +265,7 @@ main {
   .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: 
-          0 8px 30px -1px rgba(139, 92, 246, 0.3),
+          0 8px 30px -1px rgba(92, 102, 246, 0.3),
           0 0 0 1px rgba(255, 255, 255, 0.2),
           inset 0 0 30px rgba(255, 255, 255, 0.07);
   }
