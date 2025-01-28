@@ -90,7 +90,7 @@ function showLoading() {
 
 async function convertToModel(imageData) {
   console.log("Starting conversion process");
-  const apiKey = " ";
+  const apiKey = "mtEmozRWSWMXRoaNyqNE4VM11nPpb127tRpoKd6kblZVCcLNLqC3goiQATjF";
   const imgbbApiKey = "57373c61b5347fae87054e8f385fe92b";
 
   try {

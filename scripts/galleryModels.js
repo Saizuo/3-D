@@ -80,7 +80,7 @@ function createScene(canvasId, modelPath) {
     animate();
 }
 // Initialize three different models
-createScene('#model1', 'robot_playground.glb');
+createScene('#model1', 'angel_girl_vrc_comp.glb');
 createScene('#model2', 'ship_in_a_bottle.glb');
 createScene('#model3', 'bunny_doctor.glb', 200, 50, 20);
 createScene('#model3', 'bunny_doctor.glb', 200, 50, 20);

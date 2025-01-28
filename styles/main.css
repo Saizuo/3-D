@@ -35,7 +35,7 @@ body {
 
 .shape {
     position: absolute;
-    background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.1));
+    background: linear-gradient(45deg, rgba(92, 236, 246, 0.1), rgba(167, 139, 250, 0.1));
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     animation: float 15s ease-in-out infinite;
 }
@@ -106,7 +106,7 @@ main {
     --neon-purple: #5c9cf6;
     --neon-pink: #EC4899;
     --glass: rgba(255, 255, 255, 0.05);
-    --glow: rgba(92, 141, 246, 0.5);
+    --glow: rgba(16, 87, 240, 0.5);
 }
 
 .hero {
@@ -126,10 +126,10 @@ main {
 
 .hero h1 {
     font-size: 5rem;
-    background: linear-gradient(to right, #fff, #8B5CF6);
+    background: linear-gradient(to right, #fff, #0a259b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(95, 92, 246, 0.5);
+    text-shadow: 0 0 30px rgba(50, 46, 243, 0.5);
 }
 
 .hero p {
@@ -210,14 +210,15 @@ main {
       margin-bottom: 20px;
   }
 
-  .model-container {
-      width: 800px;
-      height: 800px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: transparent;
-  }
+.model-container {
+        width: 800px;
+        height: 800px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        margin-top: 180px; /* Adjust this value as needed */
+}
 
   #dinoCanvas {
       border-radius: 10px;
@@ -230,7 +231,7 @@ main {
       border-radius: 12px;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));
+      background: linear-gradient(135deg, rgba(92, 128, 246, 0.2), rgba(25, 65, 197, 0.2));
       box-shadow: 
           0 4px 24px -1px rgba(139, 92, 246, 0.2),
           0 0 0 1px rgba(255, 255, 255, 0.1),
@@ -286,7 +287,7 @@ position: fixed;
 width: 100vw;
 height: 100vh;
 z-index: -2;
-background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+background: radial-gradient(circle at center, rgba(23, 181, 255, 0.1) 0%, transparent 60%);
 }
 
 .floating-elements {
@@ -313,7 +314,7 @@ content: '';
 position: absolute;
 width: 300px;
 height: 300px;
-background: radial-gradient(circle at center, rgba(139, 92, 246, 0.3), transparent 70%);
+background: radial-gradient(circle at center, rgba(37, 14, 245, 0.3), transparent 70%);
 border-radius: 50%;
 animation: orb-float 15s ease-in-out infinite;
 }
@@ -401,8 +402,8 @@ filter: blur(100px);
   .btn-primary {
       background: linear-gradient(
           135deg,
-          rgba(139, 92, 246, 0.2),
-          rgba(236, 72, 153, 0.2)
+          rgba(92, 95, 246, 0.2),
+          rgba(72, 124, 236, 0.2)
       );
       box-shadow: 
           0 4px 24px -1px rgba(139, 92, 246, 0.2),

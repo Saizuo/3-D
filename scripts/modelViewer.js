@@ -6,9 +6,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 
 renderer.setSize(800, 800);
-camera.position.z = 27; // Reduce from 35 to zoom in
-camera.position.y = 6;  // Adjust height slightly
-camera.position.x = 3;  // Adjust side positioncamera.rotation.x = -0.3; // Tilt camera downward
+camera.position.z = 10; // Reduce from 35 to zoom in
+camera.position.y = 30;  // Adjust height slightly
+camera.position.x = 20;  // Adjust side positioncamera.rotation.x = -0.3; // Tilt camera downward
 
 // Add OrbitControls for mouse interaction
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -21,7 +21,7 @@ const loader = new THREE.GLTFLoader();
 let model;
 let mixer;
 
-loader.load('robot_playground.glb', function(gltf) {
+loader.load('angel_girl_vrc_comp.glb', function(gltf) {
     model = gltf.scene;
     model.scale.set(10, 10, 10);
     model.rotation.y = Math.PI * 0.25;
