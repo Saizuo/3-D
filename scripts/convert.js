@@ -301,6 +301,7 @@ function enableDownloadOptions(modelUrl) {
 
   // Create and add download button
   const downloadButton = document.createElement("button");
+  downloadButton.textContent = "Download";
   downloadButton.className = "btn btn-primary";
   downloadButton.addEventListener("click", () => {
     console.log("Download button clicked");

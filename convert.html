@@ -150,7 +150,7 @@
 
             <!-- Download Options -->
             <div class="download-options" style="margin-top: 2rem">
-              <h3>3D Print Model</h3>
+              <h3>Download 3D Model</h3>
               <div
                 class="format-buttons"
                 style="
@@ -158,20 +158,8 @@
                   gap: 1rem;
                   justify-content: center;
                   margin: 1rem 0;
-                "
-              >
-              <button class="btn btn-primary" id="connectButton">Connect</button>
-              <script>
-                document.getElementById('connectButton').addEventListener('click', function() {
-                  const button = this;
-                  button.textContent = "Linking to 3D Printer";
-                  setTimeout(() => {
-                    button.textContent = "No Connection Found";
-                    setTimeout(() => {
-                      button.textContent = "Please Link Your 3D Printer";
-                    }, 3000);
-                  }, 3000);
-                });
+                ">
+              <button class="btn btn-primary">Download</button>
               </script>
               </div>
             </div>
